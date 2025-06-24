@@ -1,0 +1,32 @@
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore environment and virtualenv folders
+env/
+venv/
+.venv/
+
+# VS Code settings
+.vscode/
+
+# Jupyter Notebook metadata
+*.nbconvert.ipynb
+
+# Ignore dotenv environment files
+vars.env
+.env
+*.env
+
+# Ignore data/output folders (optional)
+#outputs/
+data/
+
+# Mac OS
+.DS_Store
+
+# Windows thumbnail cache
+Thumbs.db

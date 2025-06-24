@@ -1,0 +1,99 @@
+project_specification:
+  agent: project_manager
+  description: >
+    Analizza i seguenti requisiti utente e di business per il progetto "{project_name}", di tipo "{project_type}":
+    {project_requirements}
+    
+    Scrivi un documento di Specifiche di Progetto
+  expected_output: >
+    Documento di Specifiche di Progetto con le seguenti caratteristiche:
+    - Obiettivi principali
+    - Funzionalità richieste
+    - Vincoli tecnici o di business
+    - Priorità
+    - Deliverables attesi
+  markdown: true
+  output_file: "outputs/Specifiche di Progetto.md"
+
+architecture_design:
+  agent: solution_architect
+  description: >
+    A partire dal Documento di Specifiche di Progetto definito dal Project Manager, progetta un'architettura software adatta per il progetto "{project_name}", includendo frontend, backend e database.
+  expected_output: >
+    Documento SAD di specifica dell'architettura software (Software Architecture Document) che descrive tecnicamente la struttura del progetto e come le sue componenti devono essere integrate ed interagire tra loro.
+    - Obiettivo del documento
+    - Descrizione ad alto livello del sistema
+    - Pattern architetturali usati (es. MVC, client-server, microservizi)
+    - Diagramma architetturale globale (es. diagramma a blocchi)
+    - Componenti principali (moduli, servizi, classi principali) con tecnologie e linguaggi scelti per lo sviluppo (es. React, Node.js, Java, Python)
+    - Relazioni e dipendenze
+    - Come il sistema sarà distribuito su server, dispositivi, cloud
+    - Tecnologie usate per il deployment (Docker, Kubernetes, serverless, ecc.)
+    - Modello dei dati
+    - Schema del database e tecnologie usate (es. SQL server, PostgreSQL, MongoDB)
+    - Flusso delle richieste tra componenti
+  markdown: true
+  output_file: "outputs/Architettura Tecnica.md"
+  context: [project_specification]
+
+technical_guidance:
+  agent: technical_lead
+  description: >
+    Sulla base del Documento di Specifiche di Progetto definito dal Project Manager e dell'architettura tecnica definita dal Solution Architect per il progetto "{project_name}", definisci un backlog di attività per il Backend Developer, Frontend Developer e Database Administrator.
+  expected_output: >
+    Backlog con lista di backlog item con descrizione dettagliata dell'attività, owner (Backend Developer, Frontend Developer, Database Administrator) e priorità.
+  markdown: true
+  output_file: "outputs/Backlog.md"
+  context: [project_specification, architecture_design]
+
+frontend_implementation:
+  agent: frontend_developer
+  description: >
+    Implementa i componenti del frontend per il progetto "{project_name}" selezionando i backlog item relativi al frontend dal Backlog creato dal Technical Lead. 
+    Assicurati che il frontend sia responsivo, moderno e intuitivo.
+  expected_output: >
+    Un file Markdown al cui interno inserisci:
+    - il codice sorgente dell'intero progetto di FrontEnd 
+    - file markdown con istruzioni per l'installazione e per l'esecuzione e la struttura del progetto di FrontEnd con i relativi file del codice sorgente commentanto inline
+  output_file: outputs/frontend_code.md
+  context: [technical_guidance, architecture_design]
+
+backend_implementation:
+  agent: backend_developer
+  description: >
+     Implementa i componenti del Back End per il progetto "{project_name}" selezionando i backlog item relativi al backend dal Backlog creato dal Technical Lead. 
+  expected_output: >
+    Un file Markdown al cui interno inserisci:
+    - il codice sorgente dell'intero progetto di BackEnd 
+    - file markdown con istruzioni per l'installazione e per l'esecuzione e la struttura del progetto di BackEnd con i relativi file del codice sorgente commentanto inline
+  output_file: outputs/backend_code.md
+  context: [technical_guidance, architecture_design]
+
+database_setup:
+  agent: database_admin
+  description: >
+     Implementa i componenti del database per il progetto "{project_name}" selezionando i backlog item relativi al database dal Backlog creato dal Technical Lead. 
+  expected_output: >
+    Un file Markdown contenente:
+    - script per la creazione del database 
+    - script per la creazione delle tabelle, vincoli, relazioni tra entità e indici
+    - script di inserimento dati parametrici, di configurazione e di test
+    - file markdown con istruzioni per l'installazione e per l'esecuzione
+    - Documentazione del modello ER
+  output_file: "outputs/database_file.md"
+  context: [technical_guidance, architecture_design]
+
+qa_testing:
+  agent: qa_engineer
+  description: >
+    Testa le componenti del sistema sviluppato (frontend, backend, database) per verificarne la correttezza, la sicurezza e la coerenza le specifiche del progetto definite sulla base dei seguenti requisiti:
+    {project_requirements}
+  expected_output: >
+    Report dettagliato dei test effettuati, inclusi:
+    - Tipi di test eseguiti (unit test, integration test, end-to-end)
+    - Eventuali bug trovati
+    - Copertura del codice
+    - Raccomandazioni finali per il rilascio
+  markdown: true
+  output_file: "outputs/Report QA.md"
+  context: [project_specification, frontend_implementation, backend_implementation, database_setup]
